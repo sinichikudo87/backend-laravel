@@ -90,6 +90,45 @@ return [
             'engine' => null,
         ],
 
+        'production' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_FOURTH'),
+            'port' => env('DB_PORT_FOURTH', '3306'),
+            'database' => env('DB_DATABASE_FOURTH'),
+            'username' => env('DB_USERNAME_FOURTH'),
+            'password' => env('DB_PASSWORD_FOURTH'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'engine' => null,
+        ],
+
+        'hrd' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_FIFTH'),
+            'port' => env('DB_PORT_FIFTH', '3306'),
+            'database' => env('DB_DATABASE_FIFTH'),
+            'username' => env('DB_USERNAME_FIFTH'),
+            'password' => env('DB_PASSWORD_FIFTH'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'engine' => null,
+        ],
+
+        'system_settings' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_SIXTH'),
+            'port' => env('DB_PORT_SIXTH', '3306'),
+            'database' => env('DB_DATABASE_SIXTH'),
+            'username' => env('DB_USERNAME_SIXTH'),
+            'password' => env('DB_PASSWORD_SIXTH'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'engine' => null,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
