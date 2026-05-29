@@ -22,6 +22,14 @@ use App\Http\Controllers\operations\masters\customers\CustomersController as Ope
 use App\Http\Controllers\operations\masters\garages\GaragesController as OperationsGaragesController;
 
 
+// Accounting
+use App\Http\Controllers\accounting\masters\account_category\AccountCategoryController as AccountingAccountCategoryController;
+// use App\Http\Controllers\operations\masters\units\UnitsController as OperationsUnitsController;
+// use App\Http\Controllers\operations\masters\investors\InvestorsController as OperationsInvestorsController;
+// use App\Http\Controllers\operations\masters\customers\CustomersController as OperationsCustomersController;
+// use App\Http\Controllers\operations\masters\garages\GaragesController as OperationsGaragesController;
+
+
 use Illuminate\Support\Facades\Route;
 
 // CRM API Routes
@@ -106,4 +114,9 @@ Route::prefix('public')->middleware('hmac.auth')->group(function () {
 
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
     Route::get('/v1/garages-operationals/{id?}', [OperationsGaragesController::class, 'show']);
+});
+
+// Accounting API Routes
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::get('/v1/acc-account-categories/{id?}', [AccountCategoryController::class, 'show']);
 });

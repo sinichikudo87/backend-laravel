@@ -50,7 +50,7 @@ class ReportKpiController extends Controller
             | RESPONSE
             |--------------------------------------------------------------------------
             */
-// dd($data);
+dd($data);
             return response()->json([
                 'success' => true,
                 'message' => 'Data report KPI berhasil diambil',
