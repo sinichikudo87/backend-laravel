@@ -92,7 +92,7 @@ Route::prefix('public')->middleware('hmac.auth')->group(function () {
 });
 
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
-    Route::get('/v1/kpi-reporting', [KpiReportingController::class, 'show']);
+    Route::get('/v1/kpi-reporting/{user_id}/{department_id}', [KpiReportingController::class, 'show']);
 });
 
 // Operations API Routes
