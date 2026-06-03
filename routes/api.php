@@ -12,6 +12,7 @@ use App\Http\Controllers\kpi\KpiDashboardController as KpiDashboardController;
 use App\Http\Controllers\kpi\employees\EmployeesController as KpiEmployeesController;
 use App\Http\Controllers\kpi\job_desk_master\JobDeskMasterController as KpiJobDeskMasterController;
 use App\Http\Controllers\kpi\job_desk_entry\JobDeskEntryController as KpiJobDeskEntryController;
+use App\Http\Controllers\kpi\work_progress_update\WorkProgressUpdateController as KpiWorkProgressUpdateController;
 use App\Http\Controllers\kpi\reporting\ReportKpiController as KpiReportingController;
 
 // Operations
@@ -84,11 +85,18 @@ Route::prefix('public')->middleware('hmac.auth')->group(function () {
 
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
     Route::get('/v1/job-desk-master/{id?}', [KpiJobDeskMasterController::class, 'show']);
+    Route::post('/v1/job-desk-master/store', [KpiJobDeskMasterController::class, 'store']);
 });
 
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
     Route::get('/v1/job-desk-entry/{id?}', [KpiJobDeskEntryController::class, 'show']);
     Route::post('/v1/job-desk-entry/store', [KpiJobDeskEntryController::class, 'store']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::get('/v1/kpi-work-progress-update/logs/{user_jobdesk_kpi_id}', [KpiWorkProgressUpdateController::class, 'getLogs']);
+    Route::post('/v1/kpi-work-progress-update/store', [KpiWorkProgressUpdateController::class, 'store']);   
+    Route::get('/v1/kpi-work-progress-update/{user_id}/{department_id}', [KpiWorkProgressUpdateController::class, 'show']);
 });
 
 Route::prefix('public')->middleware('hmac.auth')->group(function () {

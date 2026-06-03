@@ -87,14 +87,14 @@ class JobDeskEntryController extends Controller
             DB::connection('kpi')->beginTransaction();
 
             foreach ($logs as $log) {
-                DB::connection('kpi')->select(
+                DB::connection('kpi')->statement(
                     "CALL sp_upsert_user_jobdesk_kpi_xx26(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     [
                         $log['company_id'],
                         $log['user_id'],
                         $log['jobdesk_master_id'],
-                        (int) $log['target_value'],
-                        (int) $log['actual_value_submitted'],
+                        $log['target_value'],             
+                        $log['actual_value_submitted'],   
                         $log['score_impact'],
                         $log['period_month'],
                         $log['period_year'],
@@ -108,7 +108,8 @@ class JobDeskEntryController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Saved successfully'
+                'message' => 'Saved successfully',
+                'total_saved' => count($logs)
             ]);
 
         } catch (\Exception $e) {
@@ -116,7 +117,7 @@ class JobDeskEntryController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => 'Gagal menyimpan data: ' . $e->getMessage()
             ], 500);
         }
     }
