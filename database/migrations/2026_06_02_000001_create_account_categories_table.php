@@ -19,7 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('is_system')->default(false);
+            $table->boolean('is_currency')->default(false);
+            $table->boolean('is_bank')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->unsignedTinyInteger('seq_width')->default(2);
+            $table->unsignedInteger('next_seq')->default(1);
             $table->timestamps();
             $table->softDeletes();
 

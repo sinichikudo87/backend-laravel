@@ -71,7 +71,11 @@ class AccountCategoryController extends Controller
         $category = AccountCategory::query()->create([
             ...$request->validated(),
             'is_system' => false,
+            'is_currency' => $request->boolean('is_currency', false),
+            'is_bank' => $request->boolean('is_bank', false),
             'is_active' => $request->boolean('is_active', true),
+            'seq_width' => $request->integer('seq_width') ?: 2,
+            'next_seq' => $request->integer('next_seq') ?: 1,
         ]);
 
         $category->load('parent:id,name,code_prefix')->loadCount('journalAccounts');
@@ -144,7 +148,11 @@ class AccountCategoryController extends Controller
             'name' => $category->name,
             'description' => $category->description ?? '',
             'is_system' => $category->is_system,
+            'is_currency' => $category->is_currency,
+            'is_bank' => $category->is_bank,
             'is_active' => $category->is_active,
+            'seq_width' => $category->seq_width,
+            'next_seq' => $category->next_seq,
             'journal_accounts_count' => $category->journal_accounts_count ?? 0,
             'created_at' => $category->created_at,
             'updated_at' => $category->updated_at,

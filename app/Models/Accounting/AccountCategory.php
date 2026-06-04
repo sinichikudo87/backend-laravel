@@ -20,14 +20,22 @@ class AccountCategory extends Model
         'name',
         'description',
         'is_system',
+        'is_currency',
+        'is_bank',
         'is_active',
+        'seq_width',
+        'next_seq',
     ];
 
     protected $casts = [
         'company_id' => 'integer',
         'parent_id' => 'integer',
         'is_system' => 'boolean',
+        'is_currency' => 'boolean',
+        'is_bank' => 'boolean',
         'is_active' => 'boolean',
+        'seq_width' => 'integer',
+        'next_seq' => 'integer',
     ];
 
     public function parent(): BelongsTo

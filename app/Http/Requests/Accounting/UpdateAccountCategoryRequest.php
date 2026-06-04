@@ -33,7 +33,11 @@ class UpdateAccountCategoryRequest extends FormRequest
             ],
             'name' => ['sometimes', 'required', 'string', 'max:255'],
             'description' => ['sometimes', 'nullable', 'string'],
+            'is_currency' => ['sometimes', 'boolean'],
+            'is_bank' => ['sometimes', 'boolean'],
             'is_active' => ['sometimes', 'boolean'],
+            'seq_width' => ['sometimes', 'integer', 'min:1', 'max:9'],
+            'next_seq' => ['sometimes', 'integer', 'min:1'],
         ];
     }
 
