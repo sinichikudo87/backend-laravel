@@ -23,11 +23,8 @@ use App\Http\Controllers\operations\masters\garages\GaragesController as Operati
 
 
 // Accounting
-use App\Http\Controllers\accounting\masters\account_category\AccountCategoryController as AccountingAccountCategoryController;
-// use App\Http\Controllers\operations\masters\units\UnitsController as OperationsUnitsController;
-// use App\Http\Controllers\operations\masters\investors\InvestorsController as OperationsInvestorsController;
-// use App\Http\Controllers\operations\masters\customers\CustomersController as OperationsCustomersController;
-// use App\Http\Controllers\operations\masters\garages\GaragesController as OperationsGaragesController;
+use App\Http\Controllers\accounting\master\account_category\AccountCategoryController as AccountingAccountCategoryController;
+use App\Http\Controllers\accounting\master\journal_account\JournalAccountController as AccountingJournalAccountController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -118,5 +115,17 @@ Route::prefix('public')->middleware('hmac.auth')->group(function () {
 
 // Accounting API Routes
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
-    Route::get('/v1/acc-account-categories/{id?}', [AccountCategoryController::class, 'show']);
+    Route::get('/v1/account-categories', [AccountingAccountCategoryController::class, 'index']);
+    Route::post('/v1/account-categories', [AccountingAccountCategoryController::class, 'store']);
+    Route::get('/v1/account-categories/{accountCategory}', [AccountingAccountCategoryController::class, 'show']);
+    Route::put('/v1/account-categories/{accountCategory}', [AccountingAccountCategoryController::class, 'update']);
+    Route::patch('/v1/account-categories/{accountCategory}/status', [AccountingAccountCategoryController::class, 'updateStatus']);
+    Route::delete('/v1/account-categories/{accountCategory}', [AccountingAccountCategoryController::class, 'destroy']);
+
+    Route::get('/v1/journal-accounts', [AccountingJournalAccountController::class, 'index']);
+    Route::post('/v1/journal-accounts', [AccountingJournalAccountController::class, 'store']);
+    Route::get('/v1/journal-accounts/{journalAccount}', [AccountingJournalAccountController::class, 'show']);
+    Route::put('/v1/journal-accounts/{journalAccount}', [AccountingJournalAccountController::class, 'update']);
+    Route::patch('/v1/journal-accounts/{journalAccount}/status', [AccountingJournalAccountController::class, 'updateStatus']);
+    Route::delete('/v1/journal-accounts/{journalAccount}', [AccountingJournalAccountController::class, 'destroy']);
 });
