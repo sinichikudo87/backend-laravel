@@ -20,6 +20,10 @@ return new class extends Migration
                 ->nullOnDelete();
             $table->string('account_code', 64);
             $table->string('account_name');
+            $table->boolean('is_group')->default(false);
+            $table->string('currency_code', 10)->nullable();
+            $table->string('bank_code', 20)->nullable();
+            $table->string('tax_type', 50)->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
