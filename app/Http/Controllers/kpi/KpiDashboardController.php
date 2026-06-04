@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\crm;
+namespace App\Http\Controllers\kpi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -116,6 +116,19 @@ return [
             'engine' => null,
         ],
 
+        'hrd_android' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_FIFTH'),
+            'port' => env('DB_PORT_FIFTH', '3306'),
+            'database' => env('DB_DATABASE_FIFTH'),
+            'username' => env('DB_USERNAME_FIFTH'),
+            'password' => env('DB_PASSWORD_FIFTH'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'engine' => null,
+        ],
+
         'system_settings' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST_SIXTH'),

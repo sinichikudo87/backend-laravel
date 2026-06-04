@@ -30,6 +30,8 @@ use App\Http\Controllers\accounting\masters\account_category\AccountCategoryCont
 // use App\Http\Controllers\operations\masters\customers\CustomersController as OperationsCustomersController;
 // use App\Http\Controllers\operations\masters\garages\GaragesController as OperationsGaragesController;
 
+// HRD Android
+use App\Http\Controllers\hrd\android\login\AuthController as HrdAndroidAuthController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -127,4 +129,9 @@ Route::prefix('public')->middleware('hmac.auth')->group(function () {
 // Accounting API Routes
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
     Route::get('/v1/acc-account-categories/{id?}', [AccountCategoryController::class, 'show']);
+});
+
+// HRD Android API Routes
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-android/login', [HrdAndroidAuthController::class, 'login']);
 });
