@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # Laravel Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wisata-jatim-app
+    restart: unless-stopped
+    working_dir: /var/www
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=wisata_jatim
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
+    volumes:
+      - ./:/var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    networks:
+      - wisata-network
+    command: >
+      sh -c "php artisan migrate --force &&
+             php artisan serve --host=0.0.0.0"
+
+  # Primary MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: wisata-jatim-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: wisata_jatim
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: wisata
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - wisata-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  # Secondary MySQL Database (CRM)
+  mysql-crm:
+    image: mysql:8.0
+    container_name: wisata-jatim-mysql-crm
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: wisata_jatim_crm
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: wisata
+    volumes:
+      - ./storage/mysql-crm:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - wisata-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  # PHPMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: wisata-jatim-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: secret
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - wisata-network
+
+networks:
+  wisata-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mysql_crm_data:

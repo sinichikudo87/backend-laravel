@@ -1,4 +1,7 @@
 *.log
+*.sql
+*.sqlite
+*.sqlite3
 .DS_Store
 .env
 .env.backup
@@ -18,9 +21,12 @@
 /public/fonts-manifest.dev.json
 /public/hot
 /public/storage
+/storage/mysql
+/storage/mysql-crm
 /storage/*.key
 /storage/pail
 /vendor
+/wisata_jatim
 _ide_helper.php
 Homestead.json
 Homestead.yaml
