@@ -47,14 +47,16 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'Login berhasil',
                 'data' => [
-                    'id'                => $user->id,
-                    'id_companies_dash' => $user->id_companies_dash,
-                    'id_division'       => $user->id_division,
-                    'name'              => $user->name,
-                    'email'             => $user->email,
-                    'telepon'           => $user->telepon,
-                    'company_name'      => $user->company_name,
-                    'division_name'     => $user->division_name,
+                    'id'                    => $user->id,
+                    'id_companies_dash'     => $user->id_companies_dash,
+                    'id_division'           => $user->id_division,
+                    'name'                  => $user->name,
+                    'email'                 => $user->email,
+                    'telepon'               => $user->telepon,
+                    'company_name'          => $user->company_name,
+                    'division_name'         => $user->division_name,
+                    'biometric_log_id'      => $user->biometric_log_id,
+                    'biometric_token_hash'  => $user->biometric_token_hash,
                 ]
             ], 200);
 

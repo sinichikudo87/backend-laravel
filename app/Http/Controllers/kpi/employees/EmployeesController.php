@@ -15,7 +15,7 @@ class EmployeesController extends Controller
         try {
 
             $result = DB::select(
-                "CALL GetEmployees_xx25(?)",
+                "CALL sp_get_user_by_company_id_xx25(?)",
                 [$id]
             );
 
@@ -29,11 +29,11 @@ class EmployeesController extends Controller
             $employees = collect($result)->map(function ($row) {
 
                 return [
-                    'id' => $row->id,
-                    'name' => $row->name,
-                    'phone' => $row->phone ?? '',
-                    'email' => $row->email ?? '',
-                    'address' => $row->address ?? '',
+                    'id'      => $row->id,
+                    'name'    => $row->name,
+                    'phone'   => $row->telepon ?? '',
+                    'email'   => $row->email ?? '',
+                    'address' => '',
                 ];
             });
 

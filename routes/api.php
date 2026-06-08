@@ -32,6 +32,12 @@ use App\Http\Controllers\accounting\masters\account_category\AccountCategoryCont
 
 // HRD Android
 use App\Http\Controllers\hrd\android\login\AuthController as HrdAndroidAuthController;
+use App\Http\Controllers\hrd\android\DashboardController as HrdAndroidDashboardController;
+use App\Http\Controllers\hrd\android\attendance\BiometricController as HrdAndroidBiometricController;
+use App\Http\Controllers\hrd\android\attendance\AttendanceController as HrdAndroidAttendanceController;
+use App\Http\Controllers\hrd\android\performance\KpiController as HrdAndroidKpiController;
+use App\Http\Controllers\hrd\android\cashbon\LoanController as HrdAndroidLoanController;
+use App\Http\Controllers\hrd\android\izin\LeaveRequestController as HrdAndroidLeaveRequestController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -134,4 +140,31 @@ Route::prefix('public')->middleware('hmac.auth')->group(function () {
 // HRD Android API Routes
 Route::prefix('public')->middleware('hmac.auth')->group(function () {
     Route::post('/v1/hrd-android/login', [HrdAndroidAuthController::class, 'login']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-biometric/store', [HrdAndroidBiometricController::class, 'store']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-attendance/store', [HrdAndroidAttendanceController::class, 'store']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-dashboard/view', [HrdAndroidDashboardController::class, 'view']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-kpi/view', [HrdAndroidKpiController::class, 'view']);
+    Route::post('/v1/hrd-kpi/details-view', [HrdAndroidKpiController::class, 'getDailyLogDetails']);
+    Route::post('/v1/hrd-kpi/store', [HrdAndroidKpiController::class, 'store']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-loan/view/{id}', [HrdAndroidLoanController::class, 'view']);
+    Route::post('/v1/hrd-loan/store', [HrdAndroidLoanController::class, 'store']);
+});
+
+Route::prefix('public')->middleware('hmac.auth')->group(function () {
+    Route::post('/v1/hrd-leave-request/store', [HrdAndroidLeaveRequestController::class, 'store']);
 });

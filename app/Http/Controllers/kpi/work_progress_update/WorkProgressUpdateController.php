@@ -5,7 +5,7 @@ namespace App\Http\Controllers\kpi\work_progress_update;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator; // 🌟 PENTING: Wajib di-import agar fungsi Validator::make() aktif
+use Illuminate\Support\Facades\Validator;
 
 class WorkProgressUpdateController extends Controller
 {
@@ -99,11 +99,6 @@ class WorkProgressUpdateController extends Controller
     public function getLogs($user_jobdesk_kpi_id)
     {
         try {
-            /*
-            |--------------------------------------------------------------------------
-            | 🌟 CALL STORED PROCEDURE FETCH DATA VIA DB::SELECT 🌟
-            |--------------------------------------------------------------------------
-            */
             $logs = DB::connection('kpi')->select(
                 "CALL sp_get_daily_progress_logs_xx26(:id)",
                 [
